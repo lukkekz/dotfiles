@@ -1,0 +1,73 @@
+// Waybar config 
+{
+    "layer": "top",
+    "position": "top",
+    "height": 34,
+    "spacing": 8,
+    "margin-top": 6,
+    "margin-left": 8,
+    "margin-right": 8,
+
+    // Shown on both of your monitors.
+    "output": ["eDP-1", "HDMI-A-1"],
+
+    "modules-left": ["niri/workspaces", "niri/window"],
+    "modules-center": ["clock"],
+    "modules-right": ["pulseaudio", "backlight", "network", "cpu", "memory", "battery", "tray"],
+
+    "niri/workspaces": {
+        "format": "{index}",
+        "on-click": "activate"
+    },
+
+    "niri/window": {
+        "format": "{title}",
+        "max-length": 50,
+        "separate-outputs": true
+    },
+
+    "clock": {
+        "format": "{:%a %d %b  %I:%M %p}",
+        "tooltip-format": "<tt>{calendar}</tt>"
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟 muted",
+        "format-icons": { "default": ["󰕿", "󰖀", "󰕾"] },
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "scroll-step": 5
+    },
+
+    "backlight": {
+        "format": "󰃠 {percent}%"
+    },
+
+    "network": {
+        "format-wifi": "󰖩 {essid}",
+        "format-ethernet": "󰈀 {ipaddr}",
+        "format-disconnected": "󰖪 offline",
+        "tooltip-format": "{ifname}: {ipaddr}"
+    },
+
+    "cpu": {
+        "format": "󰻠 {usage}%",
+        "interval": 3
+    },
+
+    "memory": {
+        "format": "󰍛 {percentage}%",
+        "interval": 5
+    },
+
+    "battery": {
+        "states": { "warning": 25, "critical": 10 },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰁹"]
+    },
+
+    "tray": {
+        "spacing": 8
+    }
+}
