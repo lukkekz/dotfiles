@@ -62,10 +62,23 @@ window-rule {
     clip-to-geometry true
 }
 
+// Noctalia settings window opens as a floating window.
+window-rule {
+    match app-id="dev.noctalia.Noctalia.Settings"
+    open-floating true
+    default-column-width { fixed 1080; }
+    default-window-height { fixed 920; }
+}
+
+// Lets Noctalia notifications activate windows and run their actions.
+debug {
+    honor-xdg-activation-with-invalid-serial
+}
+
 overview {
     backdrop-color "#000000"
 }
-   
+
 animations {
     window-open {
         duration-ms 180
@@ -93,13 +106,15 @@ animations {
     }
 }
 
-spawn-at-startup "swaybg" "-c" "#000000"
-spawn-at-startup "waybar"
+// Noctalia replaces the bar, launcher, wallpaper, notifications and lock screen.
+spawn-at-startup "noctalia"
 
 binds {
     // stuff from sway
     Mod+Return { spawn "kitty"; }
-    Mod+D { spawn "wofi" "--show" "drun"; }
+    Mod+D { spawn-sh "noctalia msg panel-toggle launcher"; }
+    Mod+S { spawn-sh "noctalia msg panel-toggle control-center"; }
+    Mod+Ctrl+Comma { spawn-sh "noctalia msg settings-toggle"; }
     Mod+Shift+Q { close-window; }
     Mod+Shift+E { quit; }
     Mod+Shift+Slash { show-hotkey-overlay; }
@@ -170,9 +185,9 @@ binds {
     Mod+Shift+Comma { focus-monitor-left; }
     Mod+Shift+Period { focus-monitor-right; }
 
-    XF86AudioMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
-    XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
-    XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
+    XF86AudioMute { spawn-sh "noctalia msg volume-mute"; }
+    XF86AudioLowerVolume { spawn-sh "noctalia msg volume-down"; }
+    XF86AudioRaiseVolume { spawn-sh "noctalia msg volume-up"; }
     XF86AudioMicMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
 
     XF86AudioPlay { spawn "playerctl" "play-pause"; }
@@ -181,13 +196,13 @@ binds {
     XF86AudioNext { spawn "playerctl" "next"; }
     XF86AudioStop { spawn "playerctl" "stop"; }
 
-    XF86MonBrightnessDown { spawn "brightnessctl" "set" "5%-"; }
-    XF86MonBrightnessUp { spawn "brightnessctl" "set" "5%+"; }
+    XF86MonBrightnessDown { spawn-sh "noctalia msg brightness-down"; }
+    XF86MonBrightnessUp { spawn-sh "noctalia msg brightness-up"; }
 
     Print { screenshot; }
     Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }
 
-    Mod+Ctrl+L { spawn "swaylock"; }
-    Mod+Ctrl+S { spawn "systemctl" "suspend"; }
+    Mod+Ctrl+L { spawn-sh "noctalia msg session lock"; }
+    Mod+Ctrl+S { spawn-sh "noctalia msg session lock-and-suspend"; }
 }
