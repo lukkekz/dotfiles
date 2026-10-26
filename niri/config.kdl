@@ -27,11 +27,12 @@ layout {
         off
     }
 
+    // Border colors copied from the Noctalia palette (primary -> tertiary, outline, error).
     border {
         width 2
-        active-gradient from="#00e5ff" to="#b388ff" angle=45 relative-to="workspace-view"
-        inactive-color "#1c1c1c"
-        urgent-color "#ff1744"
+        active-gradient from="#c1c3f1" to="#ebb7da" angle=45 relative-to="workspace-view"
+        inactive-color "#46464e"
+        urgent-color "#ffb4ab"
     }
 
     shadow {
