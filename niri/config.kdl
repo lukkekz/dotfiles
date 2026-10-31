@@ -123,7 +123,7 @@ binds {
     Mod+Shift+S { spawn "flatpak" "run" "com.valvesoftware.Steam"; }
     Mod+Shift+D { spawn "flatpak" "run" "com.discordapp.Discord"; }
     Mod+Shift+F { spawn "flatpak" "run" "com.spotify.Client"; }
-    Mod+X { spawn "org.gnome.Nautilus.desktop"; }
+    Mod+X { spawn "nautilus"; }
     Mod+H { focus-column-left; }
     Mod+J { focus-window-down; }
     Mod+K { focus-window-up; }
