@@ -1,0 +1,14 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 26,
+  "modules-center": ["clock"],
+  "modules-right": ["network", "battery"],
+  "clock": { "format": "{:%a %b %d  %I:%M %p}" },
+  "network": {
+    "format-wifi": "WiFi {signalStrength}%",
+    "format-ethernet": "Wired",
+    "format-disconnected": "Offline"
+  },
+  "battery": { "format": "Bat {capacity}%" }
+}
